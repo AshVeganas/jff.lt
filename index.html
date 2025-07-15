@@ -2,11 +2,95 @@
 <html>
 <head>
   <title>I HAVE SHIT IN MY EYES</title>
+  <style>
+    body {
+      margin: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        #ff00ff,
+        #00ffff 20px,
+        #ffff00 40px
+      );
+      font-family: 'Comic Sans MS', cursive;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin: 20px;
+      animation: shake 0.5s infinite;
+    }
+
+    #player {
+      margin: 0 auto;
+      width: 800px;
+      height: 450px;
+      border: 10px dashed red;
+      box-shadow: 0 0 50px lime;
+    }
+
+    button {
+      font-size: 1.5em;
+      padding: 15px 30px;
+      background: hotpink;
+      border: none;
+      border-radius: 10px;
+      color: black;
+      cursor: pointer;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      25% { transform: translate(-1px, 2px) rotate(-1deg); }
+      50% { transform: translate(-3px, 1px) rotate(1deg); }
+      75% { transform: translate(2px, -1px) rotate(1deg); }
+      100% { transform: translate(1px, 1px) rotate(0deg); }
+    }
+
+    /* Dumb minigame box */
+    #minigame {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      width: 150px;
+      height: 150px;
+      background: #000;
+      border: 5px solid white;
+      color: lime;
+      font-family: monospace;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    #minigame button {
+      margin-top: 10px;
+      font-size: 1em;
+      padding: 5px;
+      background: yellow;
+      color: red;
+    }
+  </style>
 </head>
 <body>
-  <h1>PLEASE HELP ME IM EATING CEMENT</h1>
+  <h1>I HAVE SHIT IN MY EYES</h1>
+
   <div id="player"></div>
-  <button onclick="playRandom()">More autismr</button>
+  <br>
+  <button onclick="playRandom()">More autism</button>
+
+  <div id="minigame">
+    <div id="clicks">Clicks: 0</div>
+    <button onclick="clickMadness()">Click me idiot</button>
+  </div>
 
   <script>
     const videos = [
@@ -29,7 +113,7 @@
       "CYGmCqCnToY",
       "cCchepvm6ck",
       "Aero-g23QuY",
-      "WWdX158Intw",
+      "WWdX158Intw"
     ];
 
     function getRandomVideoId() {
@@ -38,12 +122,24 @@
 
     function loadVideo(videoId) {
       document.getElementById("player").innerHTML = `
-        <iframe width="560" height="315"
-          src="https://www.youtube.com/embed/${videoId}?autoplay=1"
+        <iframe id="ytplayer" width="800" height="450"
+          src="https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1"
           frameborder="0"
           allow="autoplay; encrypted-media"
           allowfullscreen></iframe>
       `;
+
+      setTimeout(() => {
+        const player = new YT.Player('ytplayer', {
+          events: {
+            'onStateChange': function (e) {
+              if (e.data === YT.PlayerState.ENDED) {
+                playRandom();
+              }
+            }
+          }
+        });
+      }, 100);
     }
 
     function playRandom() {
@@ -51,8 +147,31 @@
       loadVideo(id);
     }
 
-    // ✅ Make sure it runs only after page fully loads
-    window.onload = playRandom;
+    // Load YouTube API
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // Init player on load
+    function onYouTubeIframeAPIReady() {
+      playRandom();
+    }
+
+    // Minigame madness
+    let clickCount = 0;
+    function clickMadness() {
+      clickCount++;
+      document.getElementById("clicks").innerText = "Clicks: " + clickCount;
+      document.body.style.background = getRandomGradient();
+    }
+
+    function getRandomGradient() {
+      const colors = ['red', 'lime', 'cyan', 'magenta', 'yellow', 'blue', 'orange'];
+      const c1 = colors[Math.floor(Math.random() * colors.length)];
+      const c2 = colors[Math.floor(Math.random() * colors.length)];
+      return `linear-gradient(135deg, ${c1}, ${c2})`;
+    }
   </script>
 </body>
 </html>
