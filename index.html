@@ -6,22 +6,37 @@
   <style>
     html, body {
       margin: 0;
-      background: black;
       overflow: hidden;
       font-family: 'Comic Sans MS', cursive;
       color: lime;
     }
+
+    body {
+      background: linear-gradient(-45deg, red, cyan, lime, magenta);
+      background-size: 400% 400%;
+      animation: chaoticBG 4s infinite linear;
+    }
+
+    @keyframes chaoticBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     h1 {
       text-align: center;
       font-size: 4rem;
       color: red;
       animation: shake 0.3s infinite;
       margin-top: 10px;
+      text-shadow: 2px 2px yellow;
     }
+
     @keyframes shake {
       0%, 100% { transform: rotate(2deg); }
       50% { transform: rotate(-2deg); }
     }
+
     #player {
       display: block;
       margin: 20px auto;
@@ -29,7 +44,10 @@
       height: 540px;
       border: 10px double cyan;
       box-shadow: 0 0 50px magenta;
+      z-index: 2;
+      position: relative;
     }
+
     button#nextBtn {
       display: block;
       margin: 20px auto;
@@ -41,17 +59,22 @@
       cursor: pointer;
       font-weight: bold;
       animation: spin 2s linear infinite;
+      z-index: 2;
+      position: relative;
     }
+
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+
     .floating-gif {
       position: fixed;
       pointer-events: none;
       z-index: 1;
       opacity: 0.9;
-      mix-blend-mode: screen;
+      mix-blend-mode: lighten;
     }
+
     .minigame {
       position: fixed;
       background: #111;
@@ -63,9 +86,11 @@
       font-weight: bold;
       z-index: 10;
     }
+
     #game1 { bottom: 10px; left: 10px; }
     #game2 { bottom: 10px; left: 230px; }
     #game3 { bottom: 10px; left: 450px; }
+
     .mini-btn {
       margin-top: 10px;
       width: 100%;
@@ -76,6 +101,7 @@
       font-weight: bold;
       cursor: pointer;
     }
+
     #chatbox {
       position: fixed;
       bottom: 10px;
@@ -90,12 +116,14 @@
       flex-direction: column;
       z-index: 10;
     }
+
     #chatlog {
       flex: 1;
       padding: 10px;
       overflow-y: auto;
       border-bottom: 2px solid lime;
     }
+
     #chatinput {
       padding: 10px;
       border: none;
@@ -144,6 +172,7 @@
   function getRandomVideoId() {
     return videos[Math.floor(Math.random() * videos.length)];
   }
+
   function playRandom() {
     const id = getRandomVideoId();
     if (player) {
@@ -162,6 +191,7 @@
       });
     }
   }
+
   document.getElementById("nextBtn").onclick = playRandom;
 
   const tag = document.createElement('script');
@@ -182,8 +212,8 @@
   runBtn.addEventListener('mouseenter', () => {
     score++;
     updateStats();
-    const x = Math.random() * 100 + 50;
-    const y = Math.random() * 50 + 30;
+    const x = Math.random() * 150 + 50;
+    const y = Math.random() * 100 + 30;
     runBtn.style.transform = `translate(${x}px, -${y}px)`;
   });
 
@@ -221,7 +251,7 @@
     setTimeout(() => img.remove(), 10000);
   }
 
-  setInterval(spawnGif, 800);
+  setInterval(spawnGif, 700);
 </script>
 </body>
 </html>
