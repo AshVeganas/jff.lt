@@ -1,37 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Random YouTube Video</title>
+  <title>I HAVE SHIT IN MY EYES</title>
 </head>
 <body>
-  <h1>Random YouTube Video</h1>
+  <h1>PLEASE HELP ME IM EATING CEMENT</h1>
   <div id="player"></div>
-  <button onclick="playRandom()">Play Another</button>
+  <button onclick="playRandom()">More autismr</button>
 
   <script>
-    // List of YouTube video IDs (just the ID, not the full URL)
     const videos = [
       "naUGQl02N1M",
       "MsCXTR8gU8",
       "omRYig9Xuqc",
       "ifgdgFae-_g",
-	  "oSKeQsysuvo",
-	  "GBkPMPOM_vk",
-	  "C-aexeQdsRQ",
-	  "i5trPI2YRpw",
-	  "hDcRpJFrjTU",
-	  "ZPqj1WI8d0k",
-	  "4qHdwbpf4SE",
-	  "1D9oiW1wnYo",
-	  "uoufDnDHK9s",
-	  "7GBLZ1SHEwk",
-	  "p3imdwn8TrE",
-	  "bJ7yQc4SATc",
-	  "CYGmCqCnToY",
-	  "cCchepvm6ck",
-	  "Aero-g23QuY",
-	  "WWdX158Intw",
-	  
+      "oSKeQsysuvo",
+      "GBkPMPOM_vk",
+      "C-aexeQdsRQ",
+      "i5trPI2YRpw",
+      "hDcRpJFrjTU",
+      "ZPqj1WI8d0k",
+      "4qHdwbpf4SE",
+      "1D9oiW1wnYo",
+      "uoufDnDHK9s",
+      "7GBLZ1SHEwk",
+      "p3imdwn8TrE",
+      "bJ7yQc4SATc",
+      "CYGmCqCnToY",
+      "cCchepvm6ck",
+      "Aero-g23QuY",
+      "WWdX158Intw",
     ];
 
     function getRandomVideoId() {
@@ -53,8 +51,8 @@
       loadVideo(id);
     }
 
-    // Load one at start
-    playRandom();
+    // ✅ Make sure it runs only after page fully loads
+    window.onload = playRandom;
   </script>
 </body>
 </html>
