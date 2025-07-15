@@ -212,8 +212,8 @@
   runBtn.addEventListener('mouseenter', () => {
     score++;
     updateStats();
-    const x = Math.random() * 150 + 50;
-    const y = Math.random() * 100 + 30;
+    const x = Math.random() * 200 + 50;
+    const y = Math.random() * 150 + 30;
     runBtn.style.transform = `translate(${x}px, -${y}px)`;
   });
 
@@ -228,30 +228,30 @@
     }
   });
 
-  // Floating gifs
+  // ✅ Working Giphy links
   const gifURLs = [
-    "https://media.tenor.com/4A3asR4vbrYAAAAC/lithuania-flag.gif",
-    "https://media.tenor.com/TUxJdz1TJgQAAAAM/gitanas-nauseda-dance.gif",
-    "https://media.tenor.com/xG5kTbs-JHEAAAAM/turkey.gif",
-    "https://media.tenor.com/MnMm9Bp3XzIAAAAM/kebab-delicious.gif",
-    "https://media.tenor.com/jA2USUSNY2EAAAAM/lithuania-good-morning.gif",
-    "https://media.tenor.com/6ddgHbFu6ysAAAAM/fuck-off.gif",
-    "https://media.tenor.com/eaHC9iRB8y0AAAAM/shocked-shocked-face.gif"
+    "https://media.giphy.com/media/I9Q8To9uYEnhS/giphy.gif",
+    "https://media.giphy.com/media/3o6gbbuLW76jkt8vIc/giphy.gif",
+    "https://media.giphy.com/media/xT0GqzVXhFa9VwAvqM/giphy.gif",
+    "https://media.giphy.com/media/l0HlSNOxJB956qwfK/giphy.gif",
+    "https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif",
+    "https://media.giphy.com/media/1kNVpjUeOTiyJmVzdP/giphy.gif",
+    "https://media.giphy.com/media/TdfyKrN7HGTIY/giphy.gif"
   ];
 
   function spawnGif() {
     const img = document.createElement('img');
     img.src = gifURLs[Math.floor(Math.random() * gifURLs.length)];
     img.className = 'floating-gif';
-    const size = 50 + Math.random() * 100;
+    const size = 60 + Math.random() * 120;
     img.style.width = size + 'px';
     img.style.left = Math.random() * (window.innerWidth - size) + 'px';
     img.style.top = Math.random() * (window.innerHeight - size) + 'px';
     document.body.appendChild(img);
-    setTimeout(() => img.remove(), 10000);
+    setTimeout(() => img.remove(), 12000);
   }
 
-  setInterval(spawnGif, 700);
+  setInterval(spawnGif, 600);
 </script>
 </body>
 </html>
