@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random YouTube Video</title>
+</head>
+<body>
+  <h1>Random YouTube Video</h1>
+  <div id="player"></div>
+  <button onclick="playRandom()">Play Another</button>
+
+  <script>
+    // List of YouTube video IDs (just the ID, not the full URL)
+    const videos = [
+      "naUGQl02N1M",
+      "MsCXTR8gU8",
+      "omRYig9Xuqc",
+      "ifgdgFae-_g",
+	  "oSKeQsysuvo",
+	  "GBkPMPOM_vk",
+	  "C-aexeQdsRQ",
+	  "i5trPI2YRpw",
+	  "hDcRpJFrjTU",
+	  "ZPqj1WI8d0k",
+	  "4qHdwbpf4SE",
+	  "1D9oiW1wnYo",
+	  "uoufDnDHK9s",
+	  "7GBLZ1SHEwk",
+	  "p3imdwn8TrE",
+	  "bJ7yQc4SATc",
+	  "CYGmCqCnToY",
+	  "cCchepvm6ck",
+	  "Aero-g23QuY",
+	  "WWdX158Intw",
+	  
+    ];
+
+    function getRandomVideoId() {
+      return videos[Math.floor(Math.random() * videos.length)];
+    }
+
+    function loadVideo(videoId) {
+      document.getElementById("player").innerHTML = `
+        <iframe width="560" height="315"
+          src="https://www.youtube.com/embed/${videoId}?autoplay=1"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen></iframe>
+      `;
+    }
+
+    function playRandom() {
+      const id = getRandomVideoId();
+      loadVideo(id);
+    }
+
+    // Load one at start
+    playRandom();
+  </script>
+</body>
+</html>
