@@ -1,237 +1,78 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html><head>
   <title>I HAVE SHIT IN MY EYES</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-      font-family: 'Comic Sans MS', cursive;
-      background: black;
-      color: lime;
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 4em;
-      margin: 20px;
-      color: red;
-      animation: shake 0.4s infinite;
-    }
-
-    @keyframes shake {
-      0% { transform: rotate(1deg); }
-      50% { transform: rotate(-2deg); }
-      100% { transform: rotate(1deg); }
-    }
-
-    #player {
-      margin: 0 auto;
-      width: 900px;
-      height: 506px;
-      border: 10px double cyan;
-      box-shadow: 0 0 40px magenta;
-    }
-
-    button {
-      font-size: 1.5em;
-      padding: 15px 30px;
-      margin-top: 20px;
-      background: yellow;
-      border: 3px dashed magenta;
-      border-radius: 20px;
-      animation: spin 1.2s linear infinite;
-      cursor: pointer;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .floating-gif {
-      position: absolute;
-      width: 80px;
-      height: 80px;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    #minigame, #bombgame, #mousegame {
-      position: fixed;
-      bottom: 10px;
-      width: 180px;
-      background: #111;
-      border: 3px solid white;
-      color: #0f0;
-      padding: 10px;
-      font-size: 14px;
-      z-index: 10;
-    }
-
-    #minigame { left: 10px; }
-    #bombgame { left: 200px; }
-    #mousegame { left: 390px; }
-
-    .mini-btn {
-      font-size: 1em;
-      padding: 5px;
-      margin-top: 10px;
-      background: orange;
-      color: black;
-      border: 2px solid red;
-      cursor: pointer;
-    }
+    html, body {margin:0;overflow:hidden;font-family:'Comic Sans MS';color:lime;background:black}
+    h1 {text-align:center;font-size:4em;color:red;animation:shake .3s infinite}
+    @keyframes shake {0%{rotate(2deg)}50%{rotate(-3deg)}100%{rotate(2deg)}}
+    #player {margin:0 auto;width:900px;height:506px;border:12px solid cyan;box-shadow:0 0 50px magenta}
+    button.next {font-size:1.8em;padding:20px 40px;background:yellow;border:4px dashed magenta;border-radius:30px;animation:spin 1s linear infinite;cursor:pointer;margin:20px}
+    @keyframes spin {100%{rotate(360deg)}}
+    .floating-gif {position:absolute;pointer-events:none;animation:floatit 8s ease-in-out infinite}
+    @keyframes floatit {0%,100%{transform:translateY(0)}50%{transform:translateY(50px)}}
+    .minigame {position:fixed;background:#111;border:3px solid white;color:#0f0;padding:10px;font-size:14px;z-index:10}
+    #game1{bottom:10px;left:10px} #game2{bottom:10px;left:220px} #game3{bottom:10px;left:430px}
+    .mini-btn{font-size:1em;padding:5px;margin-top:5px;background:orange;color:black;border:2px solid red;cursor:pointer}
   </style>
-</head>
-<body>
+</head><body>
   <h1>I HAVE SHIT IN MY EYES</h1>
-
   <div id="player"></div>
-  <div style="text-align:center;">
-    <button onclick="playRandom()">More autism</button>
-  </div>
+  <div style="text-align:center"><button class="next" onclick="playRandom()">More autism</button></div>
 
-  <!-- Minigames -->
-  <div id="minigame">
-    <div id="clicks">Clicks: 0</div>
-    <button class="mini-btn" onclick="clickMadness()">Click Me</button>
-  </div>
+  <div class="minigame" id="game1"><div id="c1">Clicks: 0</div><button class="mini-btn" onclick="c1++,C('c1',c1)">Click troll</button></div>
+  <div class="minigame" id="game2"><div id="b1">Bombs: 0</div><button class="mini-btn" onclick="b1++,alert('Boom? Nope'),C('b1',b1)">Defuse bomb</button></div>
+  <div class="minigame" id="game3"><div id="s1">Score: 0</div><button class="mini-btn" id="runbtn">Catch me</button></div>
 
-  <div id="bombgame">
-    <div id="bombs">Bombs Disarmed: 0</div>
-    <button class="mini-btn" onclick="clickBomb()">Disarm Bomb</button>
-  </div>
-
-  <div id="mousegame">
-    <div id="score">Score: 0</div>
-    <button class="mini-btn" id="chase" style="position:relative;">Catch Me</button>
-  </div>
-
-  <!-- Scripts -->
   <script>
-    const videos = [
-      "naUGQl02N1M","MsCXTR8gU8","omRYig9Xuqc","ifgdgFae-_g",
-      "oSKeQsysuvo","GBkPMPOM_vk","C-aexeQdsRQ","i5trPI2YRpw",
-      "hDcRpJFrjTU","ZPqj1WI8d0k","4qHdwbpf4SE","1D9oiW1wnYo",
-      "uoufDnDHK9s","7GBLZ1SHEwk","p3imdwn8TrE","bJ7yQc4SATc",
-      "CYGmCqCnToY","cCchepvm6ck","Aero-g23QuY","WWdX158Intw"
-    ];
-
-    function getRandomVideoId() {
-      return videos[Math.floor(Math.random() * videos.length)];
-    }
-
-    function loadVideo(videoId) {
-      document.getElementById("player").innerHTML = `
-        <iframe id="ytplayer" width="900" height="506"
-          src="https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1"
-          frameborder="0"
-          allow="autoplay; encrypted-media"
-          allowfullscreen></iframe>
-      `;
-      setTimeout(() => {
-        const player = new YT.Player('ytplayer', {
-          events: {
-            'onStateChange': function (e) {
-              if (e.data === YT.PlayerState.ENDED) {
-                playRandom();
-              }
-            }
-          }
-        });
-      }, 200);
-    }
-
-    function playRandom() {
-      const id = getRandomVideoId();
-      loadVideo(id);
-    }
-
-    // YouTube API
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    document.body.appendChild(tag);
-    function onYouTubeIframeAPIReady() {
-      playRandom();
-    }
-
-    // Minigame madness
-    let clickCount = 0;
-    function clickMadness() {
-      clickCount++;
-      document.getElementById("clicks").innerText = "Clicks: " + clickCount;
-      document.body.style.background = randomFlashing();
-    }
-
-    let bombCount = 0;
-    function clickBomb() {
-      bombCount++;
-      document.getElementById("bombs").innerText = "Bombs Disarmed: " + bombCount;
-      alert("💣 BOOM—Just kidding. You're safe (for now).");
-    }
-
-    // Mouse chaser
-    let score = 0;
-    const chaseBtn = document.getElementById("chase");
-    chaseBtn.addEventListener("mouseenter", () => {
-      const newX = Math.floor(Math.random() * 400);
-      const newY = Math.floor(Math.random() * 100);
-      chaseBtn.style.transform = `translate(${newX}px, -${newY}px)`;
-      score++;
-      document.getElementById("score").innerText = "Score: " + score;
+    let c1=0, b1=0, s1=0;
+    function C(id,v){document.getElementById(id).innerText=id.replace('1','')+': '+v}
+    document.getElementById('runbtn').addEventListener('mouseenter',()=>{
+      s1++;;C('s1',s1);
+      const x=Math.random()*200, y=Math.random()*-50;
+      document.getElementById('runbtn').style.transform=`translate(${x}px,${y}px)`;
     });
 
-    function randomFlashing() {
-      const c1 = randomColor();
-      const c2 = randomColor();
-      return `repeating-linear-gradient(45deg, ${c1}, ${c2} 20px)`;
+    const videos=[/* your IDs */];
+    function getRandomVideoId(){return videos[Math.floor(Math.random()*videos.length)]}
+    function loadVideo(id){
+      document.getElementById('player').innerHTML=`<iframe id="yt" width="900" height="506" src="https://www.youtube.com/embed/${id}?autoplay=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+      setTimeout(()=>{new YT.Player('yt',{events:{onStateChange:e=>{if(e.data===YT.PlayerState.ENDED)playRandom()}}})},200);
     }
+    function playRandom(){loadVideo(getRandomVideoId())}
+    var tag=document.createElement('script');tag.src="https://www.youtube.com/iframe_api";document.body.appendChild(tag);
+    function onYouTubeIframeAPIReady(){playRandom()}
 
-    function randomColor() {
-      const letters = '0123456789ABCDEF';
-      let color = '#';
-      for (let i = 0; i < 6; i++) color += letters[Math.floor(Math.random() * 16)];
-      return color;
-    }
-
-    // Floating GIFs of doom
-    const gifs = [
-      "https://media.giphy.com/media/jUwpNzg9IcyrK/giphy.gif",
-      "https://media.giphy.com/media/l0ExncehJzexFpRHq/giphy.gif",
-      "https://media.giphy.com/media/3og0IPxMM0erATueVW/giphy.gif",
-      "https://media.giphy.com/media/xT9DPpf0zTqRASyzTi/giphy.gif"
+    const gifURLs=[
+      "https://media.tenor.com/4A3asR4vbrYAAAAC/lithuania-flag.gif",
+      "https://media.tenor.com/4A3asR4vbrYAAAAC/lithuania-flag.gif",
+      "https://media.tenor.com/4A3asR4vbrYAAAAC/lithuania-flag.gif",
+      "https://media.tenor.com/4A3asR4vbrYAAAAC/lithuania-flag.gif",
+      "https://media.tenor.com/4A3asR4vbrYAAAAC/lithuania-flag.gif",
+      "https://media.tenor.com/view/labas-rytas-gif-22483821", /*dummy placeholder for labas rytas*/ 
+      "https://media.tenor.com/view/kapsalon-doner-kebab-gif-20451719", /* kebab */
+      "https://media.tenor.com/view/d%C3%B6ner-gif-11672316089507059316" /* doner kebab*/
     ];
 
-    function spawnGif() {
-      const gif = document.createElement("img");
-      gif.src = gifs[Math.floor(Math.random() * gifs.length)];
-      gif.className = "floating-gif";
-      document.body.appendChild(gif);
-
-      let x = Math.random() * window.innerWidth;
-      let y = Math.random() * window.innerHeight;
-      let dx = (Math.random() - 0.5) * 4;
-      let dy = (Math.random() - 0.5) * 4;
-
-      function move() {
-        x += dx;
-        y += dy;
-        if (x < 0 || x > window.innerWidth - 80) dx *= -1;
-        if (y < 0 || y > window.innerHeight - 80) dy *= -1;
-        gif.style.left = x + "px";
-        gif.style.top = y + "px";
-        requestAnimationFrame(move);
-      }
-      move();
+    function spawn(){
+      const f=document.createElement('img');
+      f.src=gifURLs[Math.floor(Math.random()*gifURLs.length)];
+      const s=40+Math.random()*120;
+      f.style.width=s+'px';
+      f.className='floating-gif';
+      document.body.appendChild(f);
+      let x=Math.random()*window.innerWidth,
+          y=Math.random()*window.innerHeight,
+          dx=(Math.random()-0.5)*3,
+          dy=(Math.random()-0.5)*3;
+      (function m(){
+        x+=dx; y+=dy;
+        if(x<0||x>window.innerWidth-s)dx*=-1;
+        if(y<0||y>window.innerHeight-s)dy*=-1;
+        f.style.left=x+'px'; f.style.top=y+'px';
+        requestAnimationFrame(m);
+      })();
     }
 
-    // Spawn 5 gifs
-    for (let i = 0; i < 5; i++) {
-      spawnGif();
-    }
+    for(let i=0;i<15;i++)spawn();
   </script>
-</body>
-</html>
+</body></html>
