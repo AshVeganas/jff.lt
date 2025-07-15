@@ -1,78 +1,230 @@
 <!DOCTYPE html>
-<html><head>
+<html>
+<head>
   <title>I HAVE SHIT IN MY EYES</title>
   <style>
-    html, body {margin:0;overflow:hidden;font-family:'Comic Sans MS';color:lime;background:black}
-    h1 {text-align:center;font-size:4em;color:red;animation:shake .3s infinite}
-    @keyframes shake {0%{rotate(2deg)}50%{rotate(-3deg)}100%{rotate(2deg)}}
-    #player {margin:0 auto;width:900px;height:506px;border:12px solid cyan;box-shadow:0 0 50px magenta}
-    button.next {font-size:1.8em;padding:20px 40px;background:yellow;border:4px dashed magenta;border-radius:30px;animation:spin 1s linear infinite;cursor:pointer;margin:20px}
-    @keyframes spin {100%{rotate(360deg)}}
-    .floating-gif {position:absolute;pointer-events:none;animation:floatit 8s ease-in-out infinite}
-    @keyframes floatit {0%,100%{transform:translateY(0)}50%{transform:translateY(50px)}}
-    .minigame {position:fixed;background:#111;border:3px solid white;color:#0f0;padding:10px;font-size:14px;z-index:10}
-    #game1{bottom:10px;left:10px} #game2{bottom:10px;left:220px} #game3{bottom:10px;left:430px}
-    .mini-btn{font-size:1em;padding:5px;margin-top:5px;background:orange;color:black;border:2px solid red;cursor:pointer}
+    html, body {
+      margin: 0; padding: 0; overflow: hidden;
+      font-family: 'Comic Sans MS', cursive;
+      color: lime;
+      background: black;
+      background-image: repeating-radial-gradient(circle, #222 0, #111 10px);
+    }
+    h1 {
+      text-align: center;
+      font-size: 4em;
+      margin: 20px 0;
+      color: red;
+      animation: shake 0.3s infinite;
+      user-select: none;
+    }
+    @keyframes shake {
+      0% { transform: rotate(2deg); }
+      50% { transform: rotate(-3deg); }
+      100% { transform: rotate(2deg); }
+    }
+    #player {
+      margin: 0 auto;
+      width: 900px;
+      height: 506px;
+      border: 12px solid cyan;
+      box-shadow: 0 0 50px magenta;
+      display: block;
+    }
+    button.next {
+      font-size: 1.8em;
+      padding: 20px 40px;
+      background: yellow;
+      border: 4px dashed magenta;
+      border-radius: 30px;
+      animation: spin 1s linear infinite;
+      cursor: pointer;
+      margin: 20px auto;
+      display: block;
+      user-select: none;
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+    .floating-gif {
+      position: absolute;
+      pointer-events: none;
+      animation: floatit 8s ease-in-out infinite;
+      user-select: none;
+      mix-blend-mode: screen;
+      opacity: 0.85;
+    }
+    @keyframes floatit {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(50px); }
+    }
+    .minigame {
+      position: fixed;
+      background: #111;
+      border: 3px solid white;
+      color: #0f0;
+      padding: 10px;
+      font-size: 14px;
+      z-index: 10;
+      user-select: none;
+      width: 200px;
+    }
+    #game1 { bottom: 10px; left: 10px; }
+    #game2 { bottom: 10px; left: 220px; }
+    #game3 { bottom: 10px; left: 430px; }
+    .mini-btn {
+      font-size: 1em;
+      padding: 5px;
+      margin-top: 5px;
+      background: orange;
+      color: black;
+      border: 2px solid red;
+      cursor: pointer;
+      user-select: none;
+      width: 100%;
+    }
   </style>
-</head><body>
+</head>
+<body>
   <h1>I HAVE SHIT IN MY EYES</h1>
   <div id="player"></div>
-  <div style="text-align:center"><button class="next" onclick="playRandom()">More autism</button></div>
+  <button class="next" onclick="playRandom()">More autism</button>
 
-  <div class="minigame" id="game1"><div id="c1">Clicks: 0</div><button class="mini-btn" onclick="c1++,C('c1',c1)">Click troll</button></div>
-  <div class="minigame" id="game2"><div id="b1">Bombs: 0</div><button class="mini-btn" onclick="b1++,alert('Boom? Nope'),C('b1',b1)">Defuse bomb</button></div>
-  <div class="minigame" id="game3"><div id="s1">Score: 0</div><button class="mini-btn" id="runbtn">Catch me</button></div>
+  <!-- Minigames -->
+  <div class="minigame" id="game1">
+    <div id="c1">Clicks: 0</div>
+    <button class="mini-btn" onclick="c1++; updateCounter('c1', c1)">Click troll</button>
+  </div>
+  <div class="minigame" id="game2">
+    <div id="b1">Bombs defused: 0</div>
+    <button class="mini-btn" onclick="b1++; alert('Oops?'); updateCounter('b1', b1)">Defuse bomb</button>
+  </div>
+  <div class="minigame" id="game3">
+    <div id="s1">Score: 0</div>
+    <button class="mini-btn" id="runbtn">Catch me</button>
+  </div>
 
-  <script>
-    let c1=0, b1=0, s1=0;
-    function C(id,v){document.getElementById(id).innerText=id.replace('1','')+': '+v}
-    document.getElementById('runbtn').addEventListener('mouseenter',()=>{
-      s1++;;C('s1',s1);
-      const x=Math.random()*200, y=Math.random()*-50;
-      document.getElementById('runbtn').style.transform=`translate(${x}px,${y}px)`;
-    });
+<script>
+  // Counters for minigames
+  let c1 = 0, b1 = 0, s1 = 0;
+  function updateCounter(id, val) {
+    document.getElementById(id).innerText = id.replace('1', '') + ': ' + val;
+  }
 
-    const videos=[/* your IDs */];
-    function getRandomVideoId(){return videos[Math.floor(Math.random()*videos.length)]}
-    function loadVideo(id){
-      document.getElementById('player').innerHTML=`<iframe id="yt" width="900" height="506" src="https://www.youtube.com/embed/${id}?autoplay=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-      setTimeout(()=>{new YT.Player('yt',{events:{onStateChange:e=>{if(e.data===YT.PlayerState.ENDED)playRandom()}}})},200);
-    }
-    function playRandom(){loadVideo(getRandomVideoId())}
-    var tag=document.createElement('script');tag.src="https://www.youtube.com/iframe_api";document.body.appendChild(tag);
-    function onYouTubeIframeAPIReady(){playRandom()}
+  // "Catch me" button moves randomly on mouse enter
+  const runBtn = document.getElementById('runbtn');
+  runBtn.addEventListener('mouseenter', () => {
+    s1++;
+    updateCounter('s1', s1);
+    const x = Math.random() * 180;
+    const y = Math.random() * -50;
+    runBtn.style.transform = `translate(${x}px, ${y}px)`;
+  });
 
-    const gifURLs=[
-      "https://media.tenor.com/4A3asR4vbrYAAAAC/lithuania-flag.gif",
-      "https://media.tenor.com/4A3asR4vbrYAAAAC/lithuania-flag.gif",
-      "https://media.tenor.com/4A3asR4vbrYAAAAC/lithuania-flag.gif",
-      "https://media.tenor.com/4A3asR4vbrYAAAAC/lithuania-flag.gif",
-      "https://media.tenor.com/4A3asR4vbrYAAAAC/lithuania-flag.gif",
-      "https://media.tenor.com/view/labas-rytas-gif-22483821", /*dummy placeholder for labas rytas*/ 
-      "https://media.tenor.com/view/kapsalon-doner-kebab-gif-20451719", /* kebab */
-      "https://media.tenor.com/view/d%C3%B6ner-gif-11672316089507059316" /* doner kebab*/
-    ];
+  // Your YouTube video IDs
+  const videos = [
+    "naUGQl02N1M",
+    "MsCXTR8gU8",
+    "omRYig9Xuqc",
+    "ifgdgFae-_g",
+    "oSKeQsysuvo",
+    "GBkPMPOM_vk",
+    "C-aexeQdsRQ",
+    "i5trPI2YRpw",
+    "hDcRpJFrjTU",
+    "ZPqj1WI8d0k",
+    "4qHdwbpf4SE",
+    "1D9oiW1wnYo",
+    "uoufDnDHK9s",
+    "7GBLZ1SHEwk",
+    "p3imdwn8TrE",
+    "bJ7yQc4SATc",
+    "CYGmCqCnToY",
+    "cCchepvm6ck",
+    "Aero-g23QuY",
+    "WWdX158Intw"
+  ];
 
-    function spawn(){
-      const f=document.createElement('img');
-      f.src=gifURLs[Math.floor(Math.random()*gifURLs.length)];
-      const s=40+Math.random()*120;
-      f.style.width=s+'px';
-      f.className='floating-gif';
-      document.body.appendChild(f);
-      let x=Math.random()*window.innerWidth,
-          y=Math.random()*window.innerHeight,
-          dx=(Math.random()-0.5)*3,
-          dy=(Math.random()-0.5)*3;
-      (function m(){
-        x+=dx; y+=dy;
-        if(x<0||x>window.innerWidth-s)dx*=-1;
-        if(y<0||y>window.innerHeight-s)dy*=-1;
-        f.style.left=x+'px'; f.style.top=y+'px';
-        requestAnimationFrame(m);
-      })();
-    }
+  function getRandomVideoId() {
+    return videos[Math.floor(Math.random() * videos.length)];
+  }
 
-    for(let i=0;i<15;i++)spawn();
-  </script>
-</body></html>
+  function loadVideo(id) {
+    document.getElementById('player').innerHTML = `
+      <iframe id="yt" width="900" height="506"
+        src="https://www.youtube.com/embed/${id}?autoplay=1&enablejsapi=1"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen>
+      </iframe>`;
+    // Wait a bit then create YT player to catch video end event
+    setTimeout(() => {
+      if (typeof YT !== 'undefined' && YT.Player) {
+        new YT.Player('yt', {
+          events: {
+            'onStateChange': e => {
+              if (e.data === YT.PlayerState.ENDED) {
+                playRandom();
+              }
+            }
+          }
+        });
+      }
+    }, 500);
+  }
+
+  function playRandom() {
+    loadVideo(getRandomVideoId());
+  }
+
+  // Load YouTube Iframe API
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.body.appendChild(tag);
+
+  function onYouTubeIframeAPIReady() {
+    playRandom();
+  }
+
+  // GIFs matching your keywords
+  const gifURLs = [
+    // Lithuania flag
+    "https://media.tenor.com/4A3asR4vbrYAAAAC/lithuania-flag.gif",
+    // Kieša (just a funny Lithuanian meme gif)
+    "https://media.tenor.com/tpP35XgV_yYAAAAM/funny-meme.gif",
+    // Nausėda (a Lithuanian president dancing meme)
+    "https://media.tenor.com/TUxJdz1TJgQAAAAM/gitanas-nauseda-dance.gif",
+    // Turkey (literal bird)
+    "https://media.tenor.com/Rb8Je-iYwwEAAAAM/turkey-funny.gif",
+    // Kebab (food)
+    "https://media.tenor.com/view/kebab-doner-kebab-food-gif-20451719",
+    // Labas rytas (morning greeting)
+    "https://media.tenor.com/8M6cPq-wG54AAAAM/good-morning-hello.gif",
+    // Eik nx (rage, animated text)
+    "https://media.tenor.com/VCZQxP58wmQAAAAM/fuck-off-animated.gif",
+    // Mano reakcija i sita informacija (reaction gif)
+    "https://media.tenor.com/-L6zLG-AGysAAAAM/shocked-reaction.gif"
+  ];
+
+  // Spawn random GIFs moving around
+  function spawn() {
+    const f = document.createElement('img');
+    f.src = gifURLs[Math.floor(Math.random() * gifURLs.length)];
+    const size = 40 + Math.random() * 120;
+    f.style.width = size + 'px';
+    f.style.height = 'auto';
+    f.className = 'floating-gif';
+
+    document.body.appendChild(f);
+
+    let x = Math.random() * (window.innerWidth - size);
+    let y = Math.random() * (window.innerHeight - size);
+    let dx = (Math.random() - 0.5) * 3;
+    let dy = (Math.random() - 0.5) * 3;
+
+    function animate() {
+      x += dx;
+      y += dy;
+
+      if (x <= 0 || x >= window.innerWidth - size) dx *= -1;
+     
