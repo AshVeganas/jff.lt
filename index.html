@@ -1,153 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>I HAVE SHIT IN MY EYES</title>
-  <style>
-    html, body {
-      margin: 0; padding: 0;
-      overflow: hidden;
-      background: black;
-      background-image: repeating-radial-gradient(circle, #111 0, #222 10px);
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      color: lime;
-      user-select: none;
-    }
-    h1 {
-      text-align: center;
-      font-size: 4rem;
-      color: red;
-      margin: 1rem 0;
-      animation: shake 0.3s infinite;
-    }
-    @keyframes shake {
-      0%, 100% { transform: rotate(2deg); }
-      50% { transform: rotate(-3deg); }
-    }
-    #player {
-      width: 900px;
-      height: 506px;
-      margin: 0 auto;
-      border: 12px solid cyan;
-      box-shadow: 0 0 50px magenta;
-      display: block;
-      position: relative;
-      z-index: 1;
-      background: black;
-    }
-    button.next {
-      display: block;
-      margin: 20px auto;
-      font-size: 1.8rem;
-      padding: 20px 50px;
-      background: yellow;
-      border: 4px dashed magenta;
-      border-radius: 30px;
-      cursor: pointer;
-      animation: spin 1.5s linear infinite;
-      user-select: none;
-      font-weight: bold;
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    .floating-gif {
-      position: fixed;
-      pointer-events: none;
-      animation: floatit 8s ease-in-out infinite;
-      mix-blend-mode: screen;
-      opacity: 0.85;
-      user-select: none;
-      z-index: 0;
-    }
-    @keyframes floatit {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(40px); }
-    }
-    .minigame {
-      position: fixed;
-      background: #111;
-      border: 3px solid white;
-      color: #0f0;
-      padding: 10px;
-      font-size: 14px;
-      width: 200px;
-      z-index: 5;
-      user-select: none;
-    }
-    #game1 { bottom: 10px; left: 10px; }
-    #game2 { bottom: 10px; left: 220px; }
-    #game3 { bottom: 10px; left: 430px; }
-    .mini-btn {
-      width: 100%;
-      margin-top: 8px;
-      padding: 6px;
-      background: orange;
-      border: 2px solid red;
-      color: black;
-      font-weight: bold;
-      cursor: pointer;
-      user-select: none;
-    }
-  </style>
+<meta charset="UTF-8" />
+<title>I HAVE SHIT IN MY EYES</title>
+<style>
+  html, body {
+    margin: 0; padding: 0;
+    overflow: hidden;
+    background: black;
+    background-image: repeating-radial-gradient(circle, #111 0, #222 15px);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: lime;
+    user-select: none;
+  }
+  h1 {
+    text-align: center;
+    font-size: 4rem;
+    color: red;
+    margin: 1rem 0;
+    animation: shake 0.3s infinite;
+  }
+  @keyframes shake {
+    0%, 100% { transform: rotate(2deg); }
+    50% { transform: rotate(-3deg); }
+  }
+  #player {
+    width: 900px;
+    height: 506px;
+    margin: 0 auto;
+    border: 12px solid cyan;
+    box-shadow: 0 0 50px magenta;
+    display: block;
+    position: relative;
+    z-index: 1;
+    background: black;
+  }
+  button.next {
+    display: block;
+    margin: 20px auto;
+    font-size: 1.8rem;
+    padding: 20px 50px;
+    background: yellow;
+    border: 4px dashed magenta;
+    border-radius: 30px;
+    cursor: pointer;
+    animation: spin 1.5s linear infinite;
+    user-select: none;
+    font-weight: bold;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .floating-gif {
+    position: fixed;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0.85;
+    user-select: none;
+    z-index: 0;
+  }
+  .minigame {
+    position: fixed;
+    background: #111;
+    border: 3px solid white;
+    color: #0f0;
+    padding: 10px;
+    font-size: 14px;
+    width: 220px;
+    z-index: 5;
+    user-select: none;
+    font-weight: bold;
+    font-family: monospace;
+  }
+  #game1 { bottom: 10px; left: 10px; }
+  #game2 { bottom: 10px; left: 240px; }
+  #game3 { bottom: 10px; left: 470px; }
+  .mini-btn {
+    width: 100%;
+    margin-top: 8px;
+    padding: 6px;
+    background: orange;
+    border: 2px solid red;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+  }
+</style>
 </head>
 <body>
 
-  <h1>I HAVE SHIT IN MY EYES</h1>
-  <div id="player"></div>
-  <button class="next" id="nextBtn">More autism</button>
+<h1>I HAVE SHIT IN MY EYES</h1>
+<div id="player"></div>
+<button class="next" id="nextBtn">More autism</button>
 
-  <div class="minigame" id="game1">
-    <div id="c1">Clicks: 0</div>
-    <button class="mini-btn" id="clickBtn">Click troll</button>
-  </div>
-  <div class="minigame" id="game2">
-    <div id="b1">Bombs defused: 0</div>
-    <button class="mini-btn" id="bombBtn">Defuse bomb</button>
-  </div>
-  <div class="minigame" id="game3">
-    <div id="s1">Score: 0</div>
-    <button class="mini-btn" id="runBtn">Catch me</button>
-  </div>
+<!-- Minigames -->
+<div class="minigame" id="game1">
+  <div id="c1">Clicks: 0</div>
+  <button class="mini-btn" id="clickBtn">Click troll</button>
+</div>
+<div class="minigame" id="game2">
+  <div id="b1">Bombs defused: 0</div>
+  <button class="mini-btn" id="bombBtn">Defuse bomb</button>
+</div>
+<div class="minigame" id="game3">
+  <div id="s1">Score: 0</div>
+  <button class="mini-btn" id="runBtn">Catch me</button>
+</div>
 
 <script>
-  // Minigame counters and updates
-  let c1 = 0, b1 = 0, s1 = 0;
-
-  const c1El = document.getElementById('c1');
-  const b1El = document.getElementById('b1');
-  const s1El = document.getElementById('s1');
-
-  function updateCounter(el, label, val) {
-    el.textContent = `${label}: ${val}`;
-  }
+  // Minigames counters
+  let clicks = 0, bombs = 0, score = 0;
+  const clicksEl = document.getElementById('c1');
+  const bombsEl = document.getElementById('b1');
+  const scoreEl = document.getElementById('s1');
 
   // Click troll game
   document.getElementById('clickBtn').addEventListener('click', () => {
-    c1++;
-    updateCounter(c1El, 'Clicks', c1);
+    clicks++;
+    clicksEl.textContent = 'Clicks: ' + clicks;
   });
 
   // Bomb defuse game
   document.getElementById('bombBtn').addEventListener('click', () => {
-    b1++;
-    alert('BOOM? Nah, just kidding.');
-    updateCounter(b1El, 'Bombs defused', b1);
+    bombs++;
+    alert('BOOM? LOL, nope. You win!');
+    bombsEl.textContent = 'Bombs defused: ' + bombs;
   });
 
-  // Catch me game button moves on hover
+  // Catch me game
   const runBtn = document.getElementById('runBtn');
+  runBtn.style.position = 'relative';
   runBtn.addEventListener('mouseenter', () => {
-    s1++;
-    updateCounter(s1El, 'Score', s1);
-    const maxX = window.innerWidth - runBtn.offsetWidth;
-    const maxY = window.innerHeight - runBtn.offsetHeight - 10; // 10px bottom padding
-    const randomX = Math.random() * maxX;
-    const randomY = Math.random() * maxY;
-    runBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    score++;
+    scoreEl.textContent = 'Score: ' + score;
+    const maxX = 180; // container width - button width (approx)
+    const maxY = 50;
+    const randX = Math.random() * maxX;
+    const randY = Math.random() * maxY;
+    runBtn.style.transform = `translate(${randX}px, -${randY}px)`;
   });
 
-  // Video IDs list
+  // YouTube Video IDs
   const videos = [
     "naUGQl02N1M",
     "MsCXTR8gU8",
@@ -176,43 +170,42 @@
     return videos[Math.floor(Math.random() * videos.length)];
   }
 
-  // Load video and listen for end to auto-play next
-  function loadVideo(videoId) {
-    const playerDiv = document.getElementById('player');
-    playerDiv.innerHTML = `
-      <iframe id="ytplayer" width="900" height="506" 
-        src="https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1"
-        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-      </iframe>
-    `;
-
-    // Wait for YT API, then attach event listener for video end
-    setTimeout(() => {
-      if (typeof YT !== 'undefined' && YT.Player) {
-        new YT.Player('ytplayer', {
-          events: {
-            'onStateChange': (event) => {
-              if (event.data === YT.PlayerState.ENDED) {
-                playRandom();
-              }
-            }
-          }
-        });
-      }
-    }, 600);
+  // Load video with YouTube iframe API and listen for end event
+  let player;
+  function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.ENDED) {
+      playRandom();
+    }
   }
 
-  // Play a random video
   function playRandom() {
-    loadVideo(getRandomVideoId());
+    const videoId = getRandomVideoId();
+    if (player) {
+      player.loadVideoById(videoId);
+    } else {
+      player = new YT.Player('player', {
+        height: '506',
+        width: '900',
+        videoId: videoId,
+        playerVars: {
+          autoplay: 1,
+          controls: 1,
+          modestbranding: 1,
+          rel: 0
+        },
+        events: {
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
   }
 
-  // On next button click, play a random video
+  // Next button triggers new random video
   document.getElementById('nextBtn').addEventListener('click', () => {
     playRandom();
   });
 
-  // Load YT Iframe API script dynamically
+  // Load YouTube API script
   let tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
   document.body.appendChild(tag);
@@ -221,63 +214,88 @@
     playRandom();
   }
 
-  // GIF URLs for chaos
+  // GIFs related to your keywords - taken from reliable Tenor/Giphy links
   const gifURLs = [
-    "https://media.tenor.com/4A3asR4vbrYAAAAC/lithuania-flag.gif",       // Lithuania flag
-    "https://media.tenor.com/tpP35XgV_yYAAAAM/funny-meme.gif",             // Kieša meme
-    "https://media.tenor.com/TUxJdz1TJgQAAAAM/gitanas-nauseda-dance.gif",  // Nausėda dancing
-    "https://media.tenor.com/Rb8Je-iYwwEAAAAM/turkey-funny.gif",           // Turkey bird
-    "https://media.tenor.com/view/kebab-doner-kebab-food-gif-20451719",    // Kebab food
-    "https://media.tenor.com/8M6cPq-wG54AAAAM/good-morning-hello.gif",     // Labas rytas
-    "https://media.tenor.com/VCZQxP58wmQAAAAM/fuck-off-animated.gif",      // Eik nx (fuck off)
-    "https://media.tenor.com/-L6zLG-ly1UAAAAM/surprised-reaction.gif",      // Mano reakcija
+    // Lithuania
+    "https://media.tenor.com/4A3asR4vbrYAAAAC/lithuania-flag.gif",
+    "https://media.tenor.com/cNLy5vLf2yQAAAAM/lithuania-flag.gif",
+    // Kieša meme
+    "https://media.tenor.com/tpP35XgV_yYAAAAM/funny-meme.gif",
+    "https://media.tenor.com/7Cr8dXx9jxQAAAAM/kuh-i-kiesa.gif",
+    // Nausėda
+    "https://media.tenor.com/TUxJdz1TJgQAAAAM/gitanas-nauseda-dance.gif",
+    "https://media.tenor.com/WrXlOj0kxZ4AAAAM/gitanas-nauseda.gif",
+    // Turkey
+    "https://media.tenor.com/Rb8Je-iYwwEAAAAM/turkey-funny.gif",
+    "https://media.tenor.com/xG5kTbs-JHEAAAAM/turkey.gif",
+    // Kebab
+    "https://media.tenor.com/MnMm9Bp3XzIAAAAM/kebab-delicious.gif",
+    "https://media.tenor.com/2eAw4Ds78NUAAAAM/kebab-food.gif",
+    // Labas Rytas (Good Morning)
+    "https://media.tenor.com/8M6cPq-wG54AAAAM/good-morning-hello.gif",
+    "https://media.tenor.com/jA2USUSNY2EAAAAM/lithuania-good-morning.gif",
+    // Eik nx (Fuck off)
+    "https://media.tenor.com/VCZQxP58wmQAAAAM/fuck-off-animated.gif",
+    "https://media.tenor.com/6ddgHbFu6ysAAAAM/fuck-off.gif",
+    // Mano reakcija i sita informacija (Reaction)
+    "https://media.tenor.com/-L6zLG-ly1UAAAAM/surprised-reaction.gif",
+    "https://media.tenor.com/eaHC9iRB8y0AAAAM/shocked-shocked-face.gif"
   ];
 
-  // Spawn floating GIFs with random size, position, speed
+  // Spawn floating GIFs randomly sized, positioned, and drifting around
   function spawnGif(url) {
     const gif = document.createElement('img');
     gif.src = url;
     gif.classList.add('floating-gif');
 
-    // random size between 50 and 150 px
-    const size = 50 + Math.random() * 100;
+    // random size 40-150 px
+    const size = 40 + Math.random() * 110;
     gif.style.width = size + 'px';
 
-    // random start position
+    // random initial position
     gif.style.left = Math.random() * (window.innerWidth - size) + 'px';
     gif.style.top = Math.random() * (window.innerHeight - size) + 'px';
 
-    // random animation delay to desync floats
+    // random animation delay for float effect
+    gif.style.animation = `floatit ${6 + Math.random()*6}s ease-in-out infinite`;
     gif.style.animationDelay = (Math.random() * 5) + 's';
 
     document.body.appendChild(gif);
 
-    // Animate drifting movement
+    // drift movement variables
     let x = parseFloat(gif.style.left);
     let y = parseFloat(gif.style.top);
-    let dx = (Math.random() - 0.5) * 2;
-    let dy = (Math.random() - 0.5) * 2;
+    let dx = (Math.random() - 0.5) * 1.5;
+    let dy = (Math.random() - 0.5) * 1.5;
 
-    function move() {
+    // animate drifting with bounce on edges
+    function drift() {
       x += dx;
       y += dy;
-
       if (x < 0 || x > window.innerWidth - size) dx = -dx;
       if (y < 0 || y > window.innerHeight - size) dy = -dy;
-
       gif.style.left = x + 'px';
       gif.style.top = y + 'px';
-
-      requestAnimationFrame(move);
+      requestAnimationFrame(drift);
     }
-    move();
+    drift();
   }
 
-  // Spawn 20 random GIFs on load
-  for (let i = 0; i < 20; i++) {
-    const url = gifURLs[Math.floor(Math.random() * gifURLs.length)];
-    spawnGif(url);
+  // Create 25 chaotic gifs on load
+  for (let i = 0; i < 25; i++) {
+    spawnGif(gifURLs[Math.floor(Math.random() * gifURLs.length)]);
   }
+
+  // Float animation keyframes added dynamically
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes floatit {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(30px); }
+    }
+  `;
+  document.head.appendChild(style);
+
 </script>
 
 </body>
