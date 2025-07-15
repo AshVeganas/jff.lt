@@ -10,19 +10,16 @@
       font-family: 'Comic Sans MS', cursive;
       color: lime;
     }
-
     body {
       background: linear-gradient(-45deg, red, cyan, lime, magenta);
       background-size: 400% 400%;
       animation: chaoticBG 4s infinite linear;
     }
-
     @keyframes chaoticBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
     h1 {
       text-align: center;
       font-size: 4rem;
@@ -31,12 +28,10 @@
       margin-top: 10px;
       text-shadow: 2px 2px yellow;
     }
-
     @keyframes shake {
-      0%, 100% { transform: rotate(2deg); }
-      50% { transform: rotate(-2deg); }
+      0%,100% {transform: rotate(2deg);}
+      50% {transform: rotate(-2deg);}
     }
-
     #player {
       display: block;
       margin: 20px auto;
@@ -44,29 +39,19 @@
       height: 540px;
       border: 10px double cyan;
       box-shadow: 0 0 50px magenta;
-      z-index: 2;
-      position: relative;
+      z-index: 2; position: relative;
     }
-
     button#nextBtn {
-      display: block;
-      margin: 20px auto;
+      display: block; margin: 20px auto;
       padding: 20px 40px;
       font-size: 1.8rem;
-      background: yellow;
-      border: 4px dashed magenta;
-      border-radius: 30px;
-      cursor: pointer;
+      background: yellow; border: 4px dashed magenta;
+      border-radius: 30px; cursor: pointer;
       font-weight: bold;
       animation: spin 2s linear infinite;
-      z-index: 2;
-      position: relative;
+      z-index: 2; position: relative;
     }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
+    @keyframes spin { to {transform: rotate(360deg);} }
     .floating-gif {
       position: fixed;
       pointer-events: none;
@@ -74,62 +59,30 @@
       opacity: 0.9;
       mix-blend-mode: lighten;
     }
-
-    .minigame {
-      position: fixed;
-      background: #111;
-      border: 2px solid lime;
-      padding: 10px;
-      width: 200px;
-      color: lime;
-      font-size: 14px;
-      font-weight: bold;
-      z-index: 10;
-    }
-
-    #game1 { bottom: 10px; left: 10px; }
-    #game2 { bottom: 10px; left: 230px; }
-    #game3 { bottom: 10px; left: 450px; }
-
+    .minigame { position: fixed; background: #111; border: 2px solid lime;
+      padding: 10px; width: 200px; color: lime; font-size: 14px;
+      font-weight: bold; z-index: 10; }
+    #game1 { bottom:10px; left:10px; }
+    #game2 { bottom:10px; left:230px; }
+    #game3 { bottom:10px; left:450px; }
     .mini-btn {
-      margin-top: 10px;
-      width: 100%;
-      padding: 8px;
-      background: orange;
-      color: black;
-      border: 2px solid red;
-      font-weight: bold;
-      cursor: pointer;
+      margin-top:10px; width:100%; padding:8px; background:orange;
+      color:black; border:2px solid red; font-weight:bold;
+      cursor:pointer;
     }
-
     #chatbox {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      width: 260px;
-      height: 300px;
-      background: #000;
-      color: lime;
-      font-family: monospace;
-      border: 3px solid lime;
-      display: flex;
-      flex-direction: column;
-      z-index: 10;
+      position: fixed; bottom:10px; right:10px;
+      width:260px; height:300px; background:#000;
+      color:lime; font-family:monospace; border:3px solid lime;
+      display:flex; flex-direction:column; z-index:10;
     }
-
     #chatlog {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      border-bottom: 2px solid lime;
+      flex:1; padding:10px; overflow-y:auto;
+      border-bottom:2px solid lime;
     }
-
     #chatinput {
-      padding: 10px;
-      border: none;
-      background: black;
-      color: lime;
-      outline: none;
+      padding:10px; border:none; background:black;
+      color:lime; outline:none;
     }
   </style>
 </head>
@@ -142,11 +95,11 @@
 <!-- Minigames -->
 <div class="minigame" id="game1">
   <div>Clicks: <span id="clicks">0</span></div>
-  <button class="mini-btn" onclick="clicks++; updateStats();">Click troll</button>
+  <button class="mini-btn" onclick="clicks++;updateStats();">Click troll</button>
 </div>
 <div class="minigame" id="game2">
   <div>Bombs: <span id="bombs">0</span></div>
-  <button class="mini-btn" onclick="bombs++; updateStats(); alert('BOOM! Just kidding.');">Defuse bomb</button>
+  <button class="mini-btn" onclick="bombs++;updateStats();alert('BOOM! Just joking');">Defuse bomb</button>
 </div>
 <div class="minigame" id="game3">
   <div>Score: <span id="score">0</span></div>
@@ -160,98 +113,65 @@
 </div>
 
 <script>
-  const videos = [
-    "naUGQl02N1M", "MsCXTR8gU8", "omRYig9Xuqc", "ifgdgFae-_g",
-    "oSKeQsysuvo", "GBkPMPOM_vk", "C-aexeQdsRQ", "i5trPI2YRpw",
-    "hDcRpJFrjTU", "ZPqj1WI8d0k", "4qHdwbpf4SE", "1D9oiW1wnYo",
-    "uoufDnDHK9s", "7GBLZ1SHEwk", "p3imdwn8TrE", "bJ7yQc4SATc",
-    "CYGmCqCnToY", "cCchepvm6ck", "Aero-g23QuY", "WWdX158Intw"
-  ];
-
+  // Video stuff
+  const videos=["naUGQl02N1M","MsCXTR8gU8","omRYig9Xuqc","ifgdgFae-_g","oSKeQsysuvo","GBkPMPOM_vk","C-aexeQdsRQ","i5trPI2YRpw","hDcRpJFrjTU","ZPqj1WI8d0k","4qHdwbpf4SE","1D9oiW1wnYo","uoufDnDHK9s","7GBLZ1SHEwk","p3imdwn8TrE","bJ7yQc4SATc","CYGmCqCnToY","cCchepvm6ck","Aero-g23QuY","WWdX158Intw"];
   let player;
-  function getRandomVideoId() {
-    return videos[Math.floor(Math.random() * videos.length)];
-  }
-
-  function playRandom() {
+  function getRandomVideoId(){return videos[Math.floor(Math.random()*videos.length)];}
+  function playRandom(){
     const id = getRandomVideoId();
-    if (player) {
-      player.loadVideoById(id);
-    } else {
-      player = new YT.Player('player', {
-        videoId: id,
-        width: 960,
-        height: 540,
-        playerVars: { autoplay: 1 },
-        events: {
-          'onStateChange': (event) => {
-            if (event.data === YT.PlayerState.ENDED) playRandom();
-          }
-        }
-      });
-    }
+    if(player) player.loadVideoById(id);
+    else player = new YT.Player('player',{videoId:id,width:960,height:540,playerVars:{autoplay:1},events:{'onStateChange':e=>{if(e.data===YT.PlayerState.ENDED)playRandom();}}});
   }
-
   document.getElementById("nextBtn").onclick = playRandom;
-
-  const tag = document.createElement('script');
-  tag.src = "https://www.youtube.com/iframe_api";
-  document.body.appendChild(tag);
+  let tag=document.createElement('script');tag.src="https://www.youtube.com/iframe_api";document.body.appendChild(tag);
   window.onYouTubeIframeAPIReady = playRandom;
 
   // Stats
-  let clicks = 0, bombs = 0, score = 0;
-  function updateStats() {
-    document.getElementById('clicks').textContent = clicks;
-    document.getElementById('bombs').textContent = bombs;
-    document.getElementById('score').textContent = score;
+  let clicks=0,bombs=0,score=0;
+  function updateStats(){
+    document.getElementById('clicks').textContent=clicks;
+    document.getElementById('bombs').textContent=bombs;
+    document.getElementById('score').textContent=score;
   }
 
-  // Catch me button
-  const runBtn = document.getElementById('runBtn');
-  runBtn.addEventListener('mouseenter', () => {
-    score++;
-    updateStats();
-    const x = Math.random() * 200 + 50;
-    const y = Math.random() * 150 + 30;
-    runBtn.style.transform = `translate(${x}px, -${y}px)`;
-  });
+  // Catch-me
+  document.getElementById('runBtn').addEventListener('mouseenter',()=>{score++;updateStats();const x=Math.random()*200+50;const y=Math.random()*150+30;document.getElementById('runBtn').style.transform=`translate(${x}px,-${y}px)`;});
 
-  // Chatbox
-  const chatlog = document.getElementById('chatlog');
-  const chatinput = document.getElementById('chatinput');
-  chatinput.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && chatinput.value.trim()) {
-      chatlog.innerHTML += `<br>You: ${chatinput.value}<br>Support: sex`;
-      chatinput.value = '';
-      chatlog.scrollTop = chatlog.scrollHeight;
-    }
-  });
+  // Chat support
+  const chatlog=document.getElementById('chatlog');const chatinput=document.getElementById('chatinput');
+  chatinput.addEventListener('keydown',e=>{if(e.key==='Enter'&&chatinput.value.trim()){chatlog.innerHTML+=`<br>You: ${chatinput.value}<br>Support: sex`;chatinput.value='';chatlog.scrollTop=chatlog.scrollHeight;} });
 
-  // ✅ Working Giphy links
-  const gifURLs = [
-    "https://media.giphy.com/media/I9Q8To9uYEnhS/giphy.gif",
-    "https://media.giphy.com/media/3o6gbbuLW76jkt8vIc/giphy.gif",
-    "https://media.giphy.com/media/xT0GqzVXhFa9VwAvqM/giphy.gif",
-    "https://media.giphy.com/media/l0HlSNOxJB956qwfK/giphy.gif",
-    "https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif",
-    "https://media.giphy.com/media/1kNVpjUeOTiyJmVzdP/giphy.gif",
-    "https://media.giphy.com/media/TdfyKrN7HGTIY/giphy.gif"
+  // GIFs + movement
+  const gifURLs=[
+    "https://media.giphy.com/media/5htbdMIDNrLo0/giphy.gif",
+    "https://media.giphy.com/media/l0Exk8EUzSLsrErEQ/giphy.gif",
+    "https://media.giphy.com/media/3oEjI5JAWwG7XTLfAA/giphy.gif",
+    "https://media.giphy.com/media/l0HEltjEIKxipK7Ec/giphy.gif",
+    "https://media.giphy.com/media/3o7aCR7aWwXOnGR0cm/giphy.gif",
+    "https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif",
+    "https://media.giphy.com/media/3o7qE5TVAn1A9m2X08/giphy.gif"
   ];
-
-  function spawnGif() {
-    const img = document.createElement('img');
-    img.src = gifURLs[Math.floor(Math.random() * gifURLs.length)];
-    img.className = 'floating-gif';
-    const size = 60 + Math.random() * 120;
-    img.style.width = size + 'px';
-    img.style.left = Math.random() * (window.innerWidth - size) + 'px';
-    img.style.top = Math.random() * (window.innerHeight - size) + 'px';
+  function spawnGif(){
+    const img=document.createElement('img');
+    img.src=gifURLs[Math.floor(Math.random()*gifURLs.length)];
+    img.className='floating-gif';
+    const size=50+Math.random()*120;img.style.width=size+'px';
+    let x=Math.random()*(window.innerWidth-size),y=Math.random()*(window.innerHeight-size);
+    img.style.left=x+'px';img.style.top=y+'px';
     document.body.appendChild(img);
-    setTimeout(() => img.remove(), 12000);
+    let dx=(Math.random()-0.5)*4,dy=(Math.random()-0.5)*4;
+    function move(){
+      x+=dx;y+=dy;
+      if(x<0||x>window.innerWidth-size)dx*=-1;
+      if(y<0||y>window.innerHeight-size)dy*=-1;
+      img.style.left=x+'px';img.style.top=y+'px';
+      requestAnimationFrame(move);
+    }
+    move();
+    setTimeout(()=>img.remove(),15000);
   }
-
-  setInterval(spawnGif, 600);
+  setInterval(spawnGif,600);
 </script>
+
 </body>
 </html>
